@@ -3,7 +3,7 @@ package fi.haagahelia.jobTrackingDatabase.domain;
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class Visitor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class User {
 	
 	
 	
-	public User() {
+	public Visitor() {
 	}
 	
 	
@@ -35,7 +35,7 @@ public class User {
      * @param role
      */
 
-	public User(String username, String passwordHash, String role) {
+	public Visitor(String username, String passwordHash, String role) {
 		super();
 		this.username = username;
 		this.passwordHash = passwordHash;

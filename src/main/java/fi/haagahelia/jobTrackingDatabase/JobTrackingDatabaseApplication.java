@@ -12,10 +12,10 @@ import fi.haagahelia.jobTrackingDatabase.domain.Applicant;
 import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
-import fi.haagahelia.jobTrackingDatabase.domain.User;
 import fi.haagahelia.jobTrackingDatabase.domain.UserRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
+import fi.haagahelia.jobTrackingDatabase.domain.Visitor;
 
 @SpringBootApplication
 public class JobTrackingDatabaseApplication {
@@ -53,8 +53,8 @@ public class JobTrackingDatabaseApplication {
 			repository.save(v3);
 
 			// Create users with BCrypt encoded password (user/user, admin/admin)
-			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
-			User user2 = new User("admin", "$2a$08$bCCcGjB03eulCWt3CY0AZew2rVzXFyouUolL5dkL/pBgFkUH9O4J2", "ADMIN");
+			Visitor user1 = new Visitor("guest", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "GUEST");
+			Visitor user2 = new Visitor("admin", "$2a$08$bCCcGjB03eulCWt3CY0AZew2rVzXFyouUolL5dkL/pBgFkUH9O4J2", "ADMIN");
 			urepository.save(user1);
 			urepository.save(user2);
 		};

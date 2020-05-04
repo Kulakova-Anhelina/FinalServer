@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.haagahelia.jobTrackingDatabase.domain.SignupForm;
-import fi.haagahelia.jobTrackingDatabase.domain.User;
+import fi.haagahelia.jobTrackingDatabase.domain.Visitor;
 import fi.haagahelia.jobTrackingDatabase.domain.UserRepository;
 
 import javax.validation.Valid;
@@ -35,7 +35,7 @@ public class UserController {
 				BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
 				String hashPwd = bc.encode(pwd);
 
-				User newUser = new User();
+				Visitor newUser = new Visitor();
 				newUser.setPasswordHash(hashPwd);
 				newUser.setUsername(signupForm.getUsername());
 				newUser.setRole("USER");
