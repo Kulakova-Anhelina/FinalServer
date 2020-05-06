@@ -12,6 +12,8 @@ import fi.haagahelia.jobTrackingDatabase.domain.Applicant;
 import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
+import fi.haagahelia.jobTrackingDatabase.domain.Job;
+import fi.haagahelia.jobTrackingDatabase.domain.JobRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.UserRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
@@ -29,7 +31,7 @@ public class JobTrackingDatabaseApplication {
 
 	@Bean
 	public CommandLineRunner demo(VacancyRepository repository, DepartmentRepository drepository,
-			ApplicantRepository arepository, UserRepository urepository) {
+			ApplicantRepository arepository, UserRepository urepository, JobRepository jrepository) {
 		return (arg) -> {
 			drepository.save(new Department("IT"));
 			drepository.save(new Department("Marketing"));
@@ -57,6 +59,11 @@ public class JobTrackingDatabaseApplication {
 			Visitor user2 = new Visitor("admin", "$2a$08$bCCcGjB03eulCWt3CY0AZew2rVzXFyouUolL5dkL/pBgFkUH9O4J2", "ADMIN");
 			urepository.save(user1);
 			urepository.save(user2);
+			
+			Job j1 = new Job ("Analyst Programmer / Web Developer",
+					"Oregon State University - Ecampus", "This recruitment will be used to fill one full-time Analyst Programmer, competency level 2, position for Ecampus at Oregon State Universit" );
+			
+			jrepository.save(j1);
 		};
 	}
 

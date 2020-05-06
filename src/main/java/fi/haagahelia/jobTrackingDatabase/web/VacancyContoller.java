@@ -17,6 +17,7 @@ import fi.haagahelia.jobTrackingDatabase.domain.Applicant;
 import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
+import fi.haagahelia.jobTrackingDatabase.domain.JobRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
 
@@ -30,7 +31,16 @@ public class VacancyContoller {
 
 	@Autowired
 	private ApplicantRepository arepository;
+	
+	@Autowired
+	private JobRepository jrepository;
 
+	
+	@RequestMapping("/home")
+	public String home() {
+		return "home";
+
+	}
 	/**
 	 * Login page
 	 * 
@@ -169,5 +179,21 @@ public class VacancyContoller {
 		repository.deleteById(vacancyId);
 		return "redirect:/vacancylist";
 	}
+	
+	/**
+	 * This is a home page after successfully log in
+	 * 
+	 * @param model
+	 * @return the page list of all vacancies 
+	 */
+
+	@RequestMapping("/jobs")
+	public String jobsList(Model model) {
+		model.addAttribute("jobs", repository.findAll());
+		return "job";
+
+	}
+
+	
 
 }
