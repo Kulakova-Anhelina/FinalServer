@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,53 +65,6 @@ public class VacancyContoller {
 
 	}
 
-	/**
-	 * This end point: /vacancy
-	 * 
-	 * @return a Rest API JSON file with all the vacancies in database
-	 */
-
-	// RESTful service to get all vacancies
-	@RequestMapping(value = "/vacancies", method = RequestMethod.GET)
-	public @ResponseBody List<Vacancy> vacancyListRest() {
-		return (List<Vacancy>) repository.findAll();
-	}
-
-	/**
-	 * This end point: /vacancy
-	 * 
-	 * @return a Rest API JSON file with a specific id
-	 */
-
-	// RESTful service to get vacancy by id
-	@RequestMapping(value = "/vacancy/{id}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Vacancy> findStudentRest(@PathVariable("id") Long vacancyId) {
-		return repository.findById(vacancyId);
-	}
-
-	/**
-	 * This end point: /departments
-	 * 
-	 * @return a Rest API JSON file with all departments
-	 */
-
-	@RequestMapping(value = "/departments", method = RequestMethod.GET)
-	public @ResponseBody List<Department> departmentListRest() {
-		return (List<Department>) drepository.findAll();
-	}
-
-	/**
-	 * This end point: /decisions
-	 * 
-	 * @return a Rest API JSON file with all decisions
-	 */
-
-	@RequestMapping(value = "/decisions", method = RequestMethod.GET)
-	public @ResponseBody List<Applicant> applicantListRest() {
-		return (List<Applicant>) arepository.findAll();
-	}
-
-
 	
 	/**
 	 * Return page when add a vacancy to the list 
@@ -142,7 +94,7 @@ public class VacancyContoller {
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-	public String editStudent(@PathVariable("id") Long vacancyId, Model model) {
+	public String editVacancy(@PathVariable("id") Long vacancyId, Model model) {
 		model.addAttribute("vacancy", repository.findById(vacancyId));
 		model.addAttribute("departments", drepository.findAll());
 		model.addAttribute("applicants", arepository.findAll());
@@ -179,10 +131,6 @@ public class VacancyContoller {
 		repository.deleteById(vacancyId);
 		return "redirect:/vacancylist";
 	}
-
-
-	
-	
 	
 
 	/**
@@ -216,30 +164,6 @@ public class VacancyContoller {
 	
 
 	/**
-	 * This end point: /job
-	 * 
-	 * @return a Rest API JSON file with all the vacancies in database
-	 */
-
-	// RESTful service to get all vacancies
-	@RequestMapping(value = "/job", method = RequestMethod.GET)
-	public @ResponseBody List<Job> jobListRest() {
-		return (List<Job>) jrepository.findAll();
-	}
-
-	/**
-	 * This end point: /job
-	 * 
-	 * @return a Rest API JSON file with a specific id
-	 */
-
-	// RESTful service to get vacancy by id
-	@RequestMapping(value = "/job/{jobid}", method = RequestMethod.GET)
-	public @ResponseBody Optional<Job> findJonsRest(@PathVariable("jobid") Long jobid) {
-		return jrepository.findById(jobid);
-	}
-	
-	/**
 	 * Return page when add a addJob to the list 
 	 * @param  model
 	 * @return a form add
@@ -264,7 +188,76 @@ public class VacancyContoller {
 		jrepository.save(job);
 		return "redirect:/jobs";
 	}
+	
+	
+	// RESTful services
 
+	/**
+	 * This end point: /vacancy
+	 * 
+	 * @return a Rest API JSON file with all the vacancies in database
+	 */
+
+	@RequestMapping(value = "/vacancies", method = RequestMethod.GET)
+	public @ResponseBody List<Vacancy> vacancyListRest() {
+		return (List<Vacancy>) repository.findAll();
+	}
+
+	/**
+	 * This end point: /vacancy
+	 * 
+	 * @return a Rest API JSON file with a specific id
+	 */
+
+	@RequestMapping(value = "/vacancy/{id}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Vacancy> findStudentRest(@PathVariable("id") Long vacancyId) {
+		return repository.findById(vacancyId);
+	}
+
+	/**
+	 * This end point: /departments
+	 * 
+	 * @return a Rest API JSON file with all departments
+	 */
+
+	@RequestMapping(value = "/departments", method = RequestMethod.GET)
+	public @ResponseBody List<Department> departmentListRest() {
+		return (List<Department>) drepository.findAll();
+	}
+
+	/**
+	 * This end point: /decisions
+	 * 
+	 * @return a Rest API JSON file with all decisions
+	 */
+
+	@RequestMapping(value = "/decisions", method = RequestMethod.GET)
+	public @ResponseBody List<Applicant> applicantListRest() {
+		return (List<Applicant>) arepository.findAll();
+	}
+
+
+	/**
+	 * This end point: /job
+	 * 
+	 * @return a Rest API JSON file with all the vacancies in database
+	 */
+
+	@RequestMapping(value = "/job", method = RequestMethod.GET)
+	public @ResponseBody List<Job> jobListRest() {
+		return (List<Job>) jrepository.findAll();
+	}
+
+	/**
+	 * This end point: /job
+	 * 
+	 * @return a Rest API JSON file with a specific id
+	 */
+
+	@RequestMapping(value = "/job/{jobid}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Job> findJonsRest(@PathVariable("jobid") Long jobid) {
+		return jrepository.findById(jobid);
+	}
 	
 
 }
