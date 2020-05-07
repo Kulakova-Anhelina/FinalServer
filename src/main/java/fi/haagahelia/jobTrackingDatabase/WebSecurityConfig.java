@@ -13,36 +13,24 @@ import fi.haagahelia.jobTrackingDatabase.service.UserDetailServiceImpl;
 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
-
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @ComponentScan("fi.haagahelia.jobTrackingDatabase")
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private UserDetailServiceImpl userDetailsService;
-    
+	@Autowired
+	private UserDetailServiceImpl userDetailsService;
+
 	@Override
-    protected void configure(HttpSecurity http) throws Exception {
-    	http
-    		.authorizeRequests().antMatchers("/css/**", "/signup", "/saveuser").permitAll() // Enable css when logged out
-    			.and()
-            .authorizeRequests()
-                .anyRequest().authenticated()
-                .and()
-            .formLogin()
-                .loginPage("/login")
-                .defaultSuccessUrl("/home")
-                .permitAll()
-            	.and()
-            .logout()
-            	.permitAll()
-            	.and();
-    }
-     
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-    	auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    }
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/css/**", "/signup", "/saveuser").permitAll() // Enable css when logged
+																							// out
+				.and().authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login")
+				.defaultSuccessUrl("/home").permitAll().and().logout().permitAll().and();
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+	}
 }

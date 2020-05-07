@@ -10,15 +10,36 @@ public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long jobid;
+	
+	
 	private String title, company, description;
 	
+	public Job() {
+		
+	}
 	
+	
+
 	public Job(String title, String company, String description) {
 		super();
 		this.title = title;
 		this.company = company;
 		this.description = description;
 	}
+
+
+
+	public Long getJobid() {
+		return jobid;
+	}
+
+
+
+	public void setJobid(Long jobid) {
+		this.jobid = jobid;
+	}
+
+
 
 	public String getTitle() {
 		return title;

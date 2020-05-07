@@ -55,15 +55,21 @@ public class JobTrackingDatabaseApplication {
 			repository.save(v3);
 
 			// Create users with BCrypt encoded password (user/user, admin/admin)
-			Visitor user1 = new Visitor("guest", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "GUEST");
+			Visitor user1 = new Visitor("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");
 			Visitor user2 = new Visitor("admin", "$2a$08$bCCcGjB03eulCWt3CY0AZew2rVzXFyouUolL5dkL/pBgFkUH9O4J2", "ADMIN");
 			urepository.save(user1);
 			urepository.save(user2);
 			
-			Job j1 = new Job ("Analyst Programmer / Web Developer",
-					"Oregon State University - Ecampus", "This recruitment will be used to fill one full-time Analyst Programmer, competency level 2, position for Ecampus at Oregon State Universit" );
+			Job j1 = new Job ("Freelance React Native Developer",
+					"Toptal", " Aarhus, DK. Remote, Full-time, Mobile Application Development, React Native" );
 			
+			Job j2 = new Job ("Internnship for Students",
+					"Microsoft", "Copenhagen, DK. C++, Java, Full-time, collaborate with a committed team to design " );
+			Job j3 = new Job ("Internnship for Students",
+					"AutoAncle", "Aarhus, DK. Ruby on Rails, Coffeescript, SASS, React.js & Native, Bootstrap, PostgreSQL, Redis, Memcached, Sidekiq Enterprise, Dedicated servers" );
 			jrepository.save(j1);
+			jrepository.save(j2);
+			jrepository.save(j3);
 		};
 	}
 

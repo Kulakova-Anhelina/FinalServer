@@ -14,55 +14,72 @@
 <meta>
 </head>
 <body>
-	<div id="navbar" class="navbar-collapse collapse">
-		<ul class="nav navbar-nav">
-			<li class="nav-item active"><a class="nav-link" href="vacancylist">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="jobs">About</a></li>
-		</ul>
-	</div>
-	<div>
-		<h1 style="text-align: center; margin: 20px">List of Vacancies</h1>
-		<h3 th:inline="text" style="text-align: center; color: green">Welcome
-			[[${#httpServletRequest.remoteUser}]]</h3>
-		<div class="col-md-4" style="padding: 20px 0; margin: 20px">
-			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="Sign Out" class="btn btn-outline-info" />
-			</form>
+	<div class="container">
+		<div th:fragment="header">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+				<!-- Brand/logo -->
+				<a class="navbar-brand" href="#"> <img
+					src="../../static/image/lg.png" th:src="@{/image/lg.png}"
+					width="40" height="40" alt="">
+				</a>
+				<!-- Links -->
+				<ul class="navbar-nav">
+
+					<li class="nav-item"><a class="nav-link" href="#"
+						th:href="@{/home}">Home</a></li>
+					<li class="nav-item active"><a class="nav-link" href="#"
+						th:href="@{/vacancylist}">Vacancies </a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						th:href="@{/jobs}">Jobs </a></li>
+				</ul>
+
+			</nav>
 		</div>
-		<div style="padding: 0 20px">
-			<table class="table table-hover">
-				<thead>
-					<th scope="col">Job Title</th>
-					<th scope="col">Location</th>
-					<th scope="col">Company</th>
-					<th scope="col">Posted Date</th>
-					<th scope="col">Due to date</th>
-					<th scope="col">Duration</th>
-					<th scope="col">Deprtment</th>
-					<th scope="col">Status</th>
-					<th scope="col" sec:authorize="hasAuthority('ADMIN')">Delete</th>
-					<th scope="col" sec:authorize="hasAuthority('ADMIN')">Edit</th>
-				<thead>
-				<tbody>
-					<tr th:each="vacancy : ${vacancies}">
-						<td th:text="${vacancy.title}"></td>
-						<td th:text="${vacancy.location}"></td>
-						<td th:text="${vacancy.company}"></td>
-						<td th:text="${vacancy.postedDate}"></td>
-						<td th:text="${vacancy.lastDate}"></td>
-						<td th:text="${vacancy.duration}"></td>
-						<td th:text="${vacancy.department.name}"></td>
-						<td th:text="${vacancy.applicant.decision}"></td>
-						<td sec:authorize="hasAuthority('ADMIN')"><a
-							th:href="@{/delete/{id}(id=${vacancy.id})}"
-							class="btn btn-outline-danger">Delete</a></td>
-						<td sec:authorize="hasAuthority('ADMIN')"><a
-							th:href="@{/edit/{id}(id=${vacancy.id})}"
-							class="btn btn-outline-primary">Edit</a></td>
-					</tr>
-				</tbody>
-			</table>
-			<a href="/add" class="btn btn-outline-success">Add Vacancy</a>
+		<div>
+			<h1 style="text-align: center; margin: 20px">List of Vacancies</h1>
+			<div class="col-md-4" style="padding: 20px 0; margin: 20px">
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" class="btn btn-outline-info" />
+				</form>
+			</div>
+			<div style="padding: 0 20px">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th scope="col">Job Title</th>
+							<th scope="col">Location</th>
+							<th scope="col">Company</th>
+							<th scope="col">Posted Date</th>
+							<th scope="col">Due to date</th>
+							<th scope="col">Duration</th>
+							<th scope="col">Department</th>
+							<th scope="col">Status</th>
+							<th scope="col" sec:authorize="hasAuthority('ADMIN')">Delete</th>
+							<th scope="col" sec:authorize="hasAuthority('ADMIN')">Edit</th>
+						</tr>
+					<thead>
+					<tbody>
+					<tbody>
+						<tr th:each="vacancy : ${vacancies}">
+							<td th:text="${vacancy.title}"></td>
+							<td th:text="${vacancy.location}"></td>
+							<td th:text="${vacancy.company}"></td>
+							<td th:text="${vacancy.postedDate}"></td>
+							<td th:text="${vacancy.lastDate}"></td>
+							<td th:text="${vacancy.duration}"></td>
+							<td th:text="${vacancy.department.name}"></td>
+							<td th:text="${vacancy.applicant.decision}"></td>
+							<td sec:authorize="hasAuthority('ADMIN')"><a
+								th:href="@{/delete/{id}(id=${vacancy.id})}"
+								class="btn btn-outline-danger">Delete</a></td>
+							<td sec:authorize="hasAuthority('ADMIN')"><a
+								th:href="@{/edit/{id}(id=${vacancy.id})}"
+								class="btn btn-outline-primary">Edit</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<a href="/add" class="btn btn-outline-success">Add Vacancy</a>
+			</div>
 		</div>
 	</div>
 </body>

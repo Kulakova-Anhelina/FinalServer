@@ -17,6 +17,7 @@ import fi.haagahelia.jobTrackingDatabase.domain.Applicant;
 import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
+import fi.haagahelia.jobTrackingDatabase.domain.Job;
 import fi.haagahelia.jobTrackingDatabase.domain.JobRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
@@ -163,7 +164,6 @@ public class VacancyContoller {
 	}
 
 
-	
 	/**
 	 * delete by specific vacancy Id
 	 * only for Admin
@@ -179,19 +179,90 @@ public class VacancyContoller {
 		repository.deleteById(vacancyId);
 		return "redirect:/vacancylist";
 	}
+
+
 	
+	
+	
+
 	/**
-	 * This is a home page after successfully log in
+	 * Jobs page 
 	 * 
 	 * @param model
-	 * @return the page list of all vacancies 
+	 * @return the page retuns the list of jobs to apply
 	 */
 
 	@RequestMapping("/jobs")
 	public String jobsList(Model model) {
-		model.addAttribute("jobs", repository.findAll());
-		return "job";
+		model.addAttribute("jobs", jrepository.findAll());
+		return "jobs";
 
+	}
+	
+	/**
+	 * delete by specific job Id
+	 * only for Admin
+	 * @param jobId
+	 * @param model
+	 * @return 
+	 */
+
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@RequestMapping(value = "/deleteJob/{jobid}", method = RequestMethod.GET)
+	public String deleteJob(@PathVariable("jobid") Long jobid, Model model) {
+		jrepository.deleteById(jobid);
+		return "redirect:/jobs";
+	}
+	
+
+	/**
+	 * This end point: /job
+	 * 
+	 * @return a Rest API JSON file with all the vacancies in database
+	 */
+
+	// RESTful service to get all vacancies
+	@RequestMapping(value = "/job", method = RequestMethod.GET)
+	public @ResponseBody List<Job> jobListRest() {
+		return (List<Job>) jrepository.findAll();
+	}
+
+	/**
+	 * This end point: /job
+	 * 
+	 * @return a Rest API JSON file with a specific id
+	 */
+
+	// RESTful service to get vacancy by id
+	@RequestMapping(value = "/job/{jobid}", method = RequestMethod.GET)
+	public @ResponseBody Optional<Job> findJonsRest(@PathVariable("jobid") Long jobid) {
+		return jrepository.findById(jobid);
+	}
+	
+	/**
+	 * Return page when add a addJob to the list 
+	 * @param  model
+	 * @return a form add
+	 */
+	
+	
+	@RequestMapping(value = "/addJob")
+	public String addJob(Model model) {
+		model.addAttribute("job", new Job());
+		return "addJob";
+	}
+	
+	
+	/**
+	 * Return page when submit job
+	 * @param job
+	 * @return
+	 */
+	
+	@RequestMapping(value = "/saveJob", method = RequestMethod.POST)
+	public String save(Job job) {
+		jrepository.save(job);
+		return "redirect:/jobs";
 	}
 
 	
