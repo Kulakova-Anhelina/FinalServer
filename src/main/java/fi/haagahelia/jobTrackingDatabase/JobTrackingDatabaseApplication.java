@@ -8,12 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import fi.haagahelia.jobTrackingDatabase.domain.Applicant;
 import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Job;
 import fi.haagahelia.jobTrackingDatabase.domain.JobRepository;
+import fi.haagahelia.jobTrackingDatabase.domain.Status;
 import fi.haagahelia.jobTrackingDatabase.domain.UserRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
@@ -37,10 +37,10 @@ public class JobTrackingDatabaseApplication {
 			drepository.save(new Department("Marketing"));
 			drepository.save(new Department("Human Resourses"));
 
-			arepository.save(new Applicant("reject"));
-			arepository.save(new Applicant("interview"));
-			arepository.save(new Applicant("reserve list"));
-			arepository.save(new Applicant("no answer"));
+			arepository.save(new Status("reject"));
+			arepository.save(new Status("interview"));
+			arepository.save(new Status("reserve list"));
+			arepository.save(new Status("no answer"));
 
 			Vacancy v1 = new Vacancy("Front-End intern", "Denmark, Billund", "LEGO", "20.04.2020", "12.06.2020",
 					"6 months", drepository.findByName("IT").get(0), arepository.findByDecision("interview").get(0));
@@ -53,6 +53,10 @@ public class JobTrackingDatabaseApplication {
 			repository.save(v1);
 			repository.save(v2);
 			repository.save(v3);
+			log.info("fetch all the vacancies");
+			for (Vacancy vacancy : repository.findAll()) {
+				log.info(vacancy.toString());
+			}
 
 			// Create users with BCrypt encoded password (user/user, admin/admin)
 			Visitor user1 = new Visitor("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "USER");

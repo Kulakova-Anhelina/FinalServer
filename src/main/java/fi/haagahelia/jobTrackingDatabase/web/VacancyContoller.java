@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import fi.haagahelia.jobTrackingDatabase.domain.Applicant;
 import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Job;
 import fi.haagahelia.jobTrackingDatabase.domain.JobRepository;
+import fi.haagahelia.jobTrackingDatabase.domain.Status;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
 
@@ -77,7 +76,7 @@ public class VacancyContoller {
 	public String addVacancy(Model model) {
 		model.addAttribute("vacancy", new Vacancy());
 		model.addAttribute("departments", drepository.findAll());
-		model.addAttribute("applicants", arepository.findAll());
+		model.addAttribute("status", arepository.findAll());
 		return "addVacancy";
 	}
 
@@ -97,7 +96,7 @@ public class VacancyContoller {
 	public String editVacancy(@PathVariable("id") Long vacancyId, Model model) {
 		model.addAttribute("vacancy", repository.findById(vacancyId));
 		model.addAttribute("departments", drepository.findAll());
-		model.addAttribute("applicants", arepository.findAll());
+		model.addAttribute("status", arepository.findAll());
 		return "editVacancy";
 	}
 
@@ -232,8 +231,8 @@ public class VacancyContoller {
 	 */
 
 	@RequestMapping(value = "/decisions", method = RequestMethod.GET)
-	public @ResponseBody List<Applicant> applicantListRest() {
-		return (List<Applicant>) arepository.findAll();
+	public @ResponseBody List<Status> statusListRest() {
+		return (List<Status>) arepository.findAll();
 	}
 
 

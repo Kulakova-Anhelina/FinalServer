@@ -12,20 +12,20 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Applicant {
+public class Status {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long decisionid;
 	private String decision;
 
 	@JsonBackReference
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
 	private List<Vacancy> vacancies;
 
-	public Applicant() {
+	public Status() {
 	}
 
-	public Applicant(String decision) {
+	public Status(String decision) {
 		super();
 		this.decision = decision;
 	}

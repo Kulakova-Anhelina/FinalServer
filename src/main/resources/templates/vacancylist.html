@@ -68,7 +68,7 @@
 							<td th:text="${vacancy.lastDate}"></td>
 							<td th:text="${vacancy.duration}"></td>
 							<td th:text="${vacancy.department.name}"></td>
-							<td th:text="${vacancy.applicant.decision}"></td>
+							<td th:text="${vacancy.status.decision}"></td>
 							<td sec:authorize="hasAuthority('ADMIN')"><a
 								th:href="@{/delete/{id}(id=${vacancy.id})}"
 								class="btn btn-outline-danger">Delete</a></td>

@@ -1,5 +1,6 @@
 package fi.haagahelia.jobTrackingDatabase.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,14 +29,14 @@ public class Vacancy {
 	@ManyToOne
 	@JsonIgnore
 	@JoinColumn(name = "decisionid")
-	private Applicant applicant;
+	private Status status;
 
 	public Vacancy() {
 
 	}
 
 	public Vacancy(String title, String location, String company, String postedDate, String lastDate, String duration,
-			Department department, Applicant applicant) {
+			Department department, Status status) {
 		super();
 		this.title = title;
 		this.location = location;
@@ -44,7 +45,7 @@ public class Vacancy {
 		this.lastDate = lastDate;
 		this.duration = duration;
 		this.department = department;
-		this.applicant = applicant;
+		this.status= status;
 
 	}
 
@@ -52,6 +53,7 @@ public class Vacancy {
 		return id;
 	}
 
+	@Column(name="title")
 	public String getTitle() {
 		return title;
 	}
@@ -63,7 +65,7 @@ public class Vacancy {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	@Column(name="location")
 	public String getLocation() {
 		return location;
 	}
@@ -71,7 +73,7 @@ public class Vacancy {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
+	@Column(name="company")
 	public String getCompany() {
 		return company;
 	}
@@ -79,7 +81,7 @@ public class Vacancy {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
+	@Column(name="postedDate")
 	public String getPostedDate() {
 		return postedDate;
 	}
@@ -87,7 +89,7 @@ public class Vacancy {
 	public void setPostedDate(String postedDate) {
 		this.postedDate = postedDate;
 	}
-
+	@Column(name="lastdate")
 	public String getLastDate() {
 		return lastDate;
 	}
@@ -95,7 +97,7 @@ public class Vacancy {
 	public void setLastDate(String lastDate) {
 		this.lastDate = lastDate;
 	}
-
+	@Column(name="duration")
 	public String getDuration() {
 		return duration;
 	}
@@ -103,7 +105,7 @@ public class Vacancy {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
-
+	@Column(name="department")
 	public Department getDepartment() {
 		return department;
 	}
@@ -111,13 +113,13 @@ public class Vacancy {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
-
-	public Applicant getApplicant() {
-		return applicant;
+	@Column(name="status")
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }
