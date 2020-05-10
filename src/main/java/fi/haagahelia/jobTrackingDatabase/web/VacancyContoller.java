@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Job;
 import fi.haagahelia.jobTrackingDatabase.domain.JobRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Status;
+import fi.haagahelia.jobTrackingDatabase.domain.StatusRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
 
@@ -29,7 +29,7 @@ public class VacancyContoller {
 	private DepartmentRepository drepository;
 
 	@Autowired
-	private ApplicantRepository arepository;
+	private StatusRepository arepository;
 	
 	@Autowired
 	private JobRepository jrepository;

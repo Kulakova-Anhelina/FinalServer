@@ -8,12 +8,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import fi.haagahelia.jobTrackingDatabase.domain.ApplicantRepository;
+
 import fi.haagahelia.jobTrackingDatabase.domain.Department;
 import fi.haagahelia.jobTrackingDatabase.domain.DepartmentRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Job;
 import fi.haagahelia.jobTrackingDatabase.domain.JobRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Status;
+import fi.haagahelia.jobTrackingDatabase.domain.StatusRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.UserRepository;
 import fi.haagahelia.jobTrackingDatabase.domain.Vacancy;
 import fi.haagahelia.jobTrackingDatabase.domain.VacancyRepository;
@@ -31,7 +32,7 @@ public class JobTrackingDatabaseApplication {
 
 	@Bean
 	public CommandLineRunner demo(VacancyRepository repository, DepartmentRepository drepository,
-			ApplicantRepository arepository, UserRepository urepository, JobRepository jrepository) {
+			StatusRepository arepository, UserRepository urepository, JobRepository jrepository) {
 		return (arg) -> {
 			drepository.save(new Department("IT"));
 			drepository.save(new Department("Marketing"));

@@ -11,10 +11,10 @@ public interface VacancyRepository extends CrudRepository<Vacancy, Long> {
 
 	List<Vacancy> findByTitle(String title);
 	
-	// Enabling ignoring case
-	List<Vacancy>  findByCompanyIgnoreCase(String company);
+	List<Vacancy> findByLocation(@Param("location") String location);
+	List<Vacancy> findByCompany(@Param("company") String company);
+	List<Vacancy> findByPostedDate(@Param("postedDate") String postedDate);
 	
-	// Enabling ORDER BY for a query 
-	List<Vacancy> findByTitleOrderByTitleAsc(String title);
+	
 
 }
