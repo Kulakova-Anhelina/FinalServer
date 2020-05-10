@@ -1,5 +1,6 @@
 package fi.haagahelia.jobTrackingDatabase.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -40,7 +41,7 @@ public class Job {
 	}
 
 
-
+	@Column(name="title")
 	public String getTitle() {
 		return title;
 	}
@@ -48,7 +49,7 @@ public class Job {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
+	@Column(name="company")
 	public String getCompany() {
 		return company;
 	}
@@ -56,7 +57,7 @@ public class Job {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-
+	@Column(name="description")
 	public String getDescription() {
 		return description;
 	}

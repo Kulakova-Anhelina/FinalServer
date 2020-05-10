@@ -3,6 +3,7 @@ package fi.haagahelia.jobTrackingDatabase.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,7 +38,7 @@ public class Status {
 	public void setDecisionid(Long decisionid) {
 		this.decisionid = decisionid;
 	}
-
+	@Column(name="decision")
 	public String getDecision() {
 		return decision;
 	}
