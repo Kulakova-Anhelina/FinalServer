@@ -30,8 +30,6 @@ public class Status {
 		this.decision = decision;
 	}
 
-	
-
 	public Long getDecisionid() {
 		return decisionid;
 	}
